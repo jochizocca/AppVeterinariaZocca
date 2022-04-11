@@ -7,11 +7,12 @@
     <title>Clientes Formulario</title>
 </head>
 <body>
-  <form action="/AppVet/TurnosformularioPost/" method= "POST">{% csrf_token %}
-    <p>dia:<input type:"text" name="dia" placeholder="ingrese su dia"></p>
-    <p>hora:<input type:"text" name="hora" placeholder="ingrese su hora"></p>
-    <p>email:<input type:"text" name="email" placeholder="ingrese su email"></p>
-    >
+
+    {% if mi_form.errors %}
+      <p>style="color: red:">Datos incorrectos, intente de nuevo</p>
+    {% endif %}
+  <form action="/AppVet/Turnosformulario/" method= "POST">{% csrf_token %}
+     {{mi_form.as_p}}
 
     <input type="submit" value="Enviar">
     

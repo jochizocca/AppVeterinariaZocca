@@ -7,10 +7,12 @@
     <title>Clientes Formulario</title>
 </head>
 <body>
-  <form action="/AppVet/ProductosformularioPost/" method= "POST">{% csrf_token %}
-    <p>nombre producto:<input type:"text" nombre="nombre_producto" placeholder="ingrese su producto"></p>
-    <p>sku:<input type:"text" name="sku" placeholder="ingrese su sku"></p>
 
+    {% if mi_form.errors %}
+      <p>style="color: red:">Datos incorrectos, intente de nuevo</p>
+    {% endif %}
+  <form action="/AppVet/Productosformulario/" method= "POST">{% csrf_token %}
+     {{mi_form.as_p}}
     <input type="submit" value="Enviar">
     
 </body>
