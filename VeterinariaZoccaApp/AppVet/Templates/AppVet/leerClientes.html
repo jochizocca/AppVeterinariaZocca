@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Clientes</title>
+</head>
+<body>
+  <ul>
+   {%for Clientes in lista_clientes %}
+       <li>{{Clientes.nombre}} {{Clientes.apellido}} {{Clientes.dni}} </li>
+   {% endfor %}
+
+  </ul>
+  <br>
+  
+  <a href='/AppVet/Clientesformulario'>Agregar otro Cliente</a>
+      
+</body>
+</html>

@@ -6,6 +6,12 @@ from .views import clientes
 from .views import producto
 from .views import animales
 from .views import inicio
+from .views import leerAnimales
+from .views import leerClientes
+from .views import leerProductos
+from .views import leerTurnos
+from .views import EliminarAnimales
+
 
 
 
@@ -26,5 +32,14 @@ urlpatterns = [
     #path('ProductoformularioPost/',ProductosFormularioPost,name='ProductoFormularioPost'),
     #path('AnimalesformularioPost/',AnimalesFormularioPost,name='AnimalesFormularioPost'),
     path('busquedaproductos/',busquedaproductos,name='busquedacliente'),
-    path('buscar/',buscar,name='buscar')
-    ]
+    path('buscar/',buscar,name='buscar'),
+     path('busquedaproductos/',busquedaproductos,name='busquedacliente'),
+    path('buscar/',buscar,name='buscar'),
+    path('leerAnimales/', leerAnimales, name='leerAnimales'),
+    path('leerClientes/', leerClientes, name='leerClientes'),
+    path('leerProductos/', leerProductos, name='leerProductos'),
+    path('leerTurnos/', leerTurnos, name='leerTurnos'),
+    path('EliminarAnimales/<id>', EliminarAnimales, name='EliminarAnimales'),
+
+
+        ]

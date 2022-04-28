@@ -181,3 +181,37 @@ def buscar(request):
     else:
         return HttpResponse ("No enviaste datos")
 
+
+def leerAnimales(request):
+    animales = Animales.objects.all()
+    
+    contexto= {"lista_animales": animales} 
+    return  render (request , 'AppVet/leerAnimales.html', contexto)
+
+def leerClientes(request):
+    clientes = Clientes.objects.all()
+    
+    contexto= {"lista_clientes": clientes} 
+    return  render (request , 'AppVet/leerClientes.html', contexto)
+
+def leerProductos(request):
+    productos = Productos.objects.all()
+    
+    contexto= {"lista_productos": productos} 
+    return  render (request , 'AppVet/leerProductos.html', contexto)
+
+def leerTurnos(request):
+    turnos = Turnos.objects.all()
+    
+    contexto= {"lista_turnos": turnos} 
+    return  render (request , 'AppVet/leerTurnos.html', contexto)
+
+def EliminarAnimales(request, id):
+    animales = Animales.objects.get(id=id)
+    animales.delete()
+    
+    animales = Animales.objects.all()
+    
+    contexto= {"lista_animales": animales} 
+    return  render (request , 'AppVet/leerAnimales.html', contexto)
+
