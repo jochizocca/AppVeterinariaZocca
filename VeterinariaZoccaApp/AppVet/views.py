@@ -1,13 +1,23 @@
+from dataclasses import dataclass
+from logging.config import valid_ident
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import Animalesformulario, Clientesformulario, Productosformulario, Turnosformulario
-from .models import Clientes
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.mixins import  LoginRequiredMixin
+from django.contrib.auth.decorators import login_required 
+
+from .forms import Animalesformulario, Clientesformulario, Productosformulario, Turnosformulario, UserEditForm
+from .models import Avatar, Clientes
 from .models import Animales
 from .models import Turnos
 from .models import Productos
 
-
+@login_required
 def clientes(request):
 
 
@@ -15,7 +25,7 @@ def clientes(request):
     return render(request,'AppVet/Clientes.html')
 
 
-
+@login_required
 def turnos(request):
 
         
@@ -27,7 +37,7 @@ def producto(request):
    
     
     return render(request,'AppVet/Productos.html')
-
+@login_required
 def animales(request):
 
     
@@ -37,7 +47,8 @@ def bienvenida (request):
     return HttpResponse('Bienvenidos a la Veterinaria del Dr Zocca')
 
 def inicio (request):
-    return render(request,'AppVet/inicio.html')   
+    avatar=Avatar.objects.get(user=request.user.id)
+    return render(request,'AppVet/inicio.html', {'avatar':avatar})   
 
 def ClientesFormulario (request):
     if request.method =='POST':
@@ -74,8 +85,8 @@ def TurnosFormulario (request):
                 hora=informacion['hora']
                 email=informacion['email']
                 
-                clientes= Clientes(dia=dia,hora=hora,email=email)
-                clientes.save()
+                turnos= Turnos(dia=dia,hora=hora,email=email)
+                turnos.save()
                 
                 return render(request, "AppVet/Inicio.html")
     else:
@@ -96,8 +107,8 @@ def AnimalesFormulario (request):
                 raza=informacion['raza']
                 
                 
-                clientes= Animales(nombre_animal=nombre_animal,raza=raza)
-                clientes.save()
+                animales= Animales(nombre_animal=nombre_animal,raza=raza)
+                animales.save()
                 
                 return render(request, "AppVet/Inicio.html")
     else:
@@ -118,8 +129,8 @@ def ProductosFormulario (request):
                 sku=informacion['sku']
                 
                 
-                clientes= Productos(n_producto=n_producto,sku=sku)
-                clientes.save()
+                productos= Productos(n_producto=n_producto,sku=sku)
+                productos.save()
                 
                 return render(request, "AppVet/Inicio.html")
     else:
@@ -214,4 +225,122 @@ def EliminarAnimales(request, id):
     
     contexto= {"lista_animales": animales} 
     return  render (request , 'AppVet/leerAnimales.html', contexto)
+
+def EditarAnimales(request,id):
+    animales = Animales.objects.get(id=id)
+    
+    if request.method== 'POST':
+
+        mi_formulario= Animalesformulario(request.POST)
+        
+
+        if mi_formulario.is_valid():
+            informacion= mi_formulario.cleaned_data
+
+            Animales.nombre_animal= informacion['nombre']
+            Animales.raza= informacion['raza']
+
+            Animales.save()
+
+            return render(request, 'AppVet/inicio.html')
+
+    else:
+
+        mi_formulario = Animalesformulario(
+           initial={
+               'nombre_animal': animales.nombre_animal,
+               'raza': animales.raza
+           }
+        )
+
+    return render(request, 'AppVet/EditarAnimales.html', {"mi_formulario":mi_formulario})
+
+class ClientesList(ListView):
+    model= Clientes
+    template_name= "AppVet/clientes_list.html"
+
+class ClientesDetail(DetailView):
+    model= Clientes
+    template_name= "AppVet/clientes_detalle.html"
+
+class ClientesCreate(LoginRequiredMixin,CreateView):
+    model=Clientes
+    succes_url= 'AppVet/Clientes/list'
+    fields=['nombre','apellido','dni']
+
+class ClientesUpdate(LoginRequiredMixin,UpdateView):
+    model=Clientes
+    succes_url= 'AppVet/Clientes/list'
+    fields=['nombre','apellido','dni']
+
+class ClientesDelete(LoginRequiredMixin,DeleteView):
+    model=Clientes
+    template_name= "AppVet/clientes_delete.html"
+    succes_url= 'AppVet/Clientes/list'
+
+def loginView(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+            datos = form.cleaned_data
+
+            usuario= datos ['username']
+            psw = datos ['password']
+
+            user = authenticate(username=usuario, password=psw)
+
+            if user:
+                login(request,user)
+                return render(request,"AppVet/inicio.html",{"mensaje": f'Bienvenido {usuario}'})
+
+
+            else:
+
+                return render(request,"AppVet/inicio.html",{"mensaje": 'Datos Incorrectos'})
+    
+    else:
+        form=AuthenticationForm()
+    return render(request, "AppVet/login.html", {'form': form})
+
+
+def registrar(request):
+    if request.method == 'POST':
+        form = UserCreationForm( request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+
+            form.save()
+            return render(request, "AppVet/inicio.html",{'mensaje': f'Usuario creado con exito: {username}'})           
+ 
+    else:
+        form=UserCreationForm()
+    return render(request, "AppVet/registrar.html", {'form': form})
+
+@login_required
+def editar_perfil(request):
+    usuario=request.user
+    if request.method=='POST':
+       
+        mi_formulario= UserEditForm(request.POST)
+        
+        if mi_formulario.is_valid():
+         
+          data=mi_formulario.cleaned_data
+
+          usuario.email=data['email'] 
+          usuario.password1=data['password1'] 
+          usuario.password2=data['password2'] 
+          usuario.first_name=data['first_name']
+          usuario.last_name=data['last_name']
+          usuario.save()
+
+          return render(request,'AppVet/inicio.html')
+
+    else:
+
+        mi_formulario=UserEditForm(initial={'email':usuario.email})
+
+    return render(request, "AppVet/editarperfil.html",{"mi_formulario":mi_formulario})
 

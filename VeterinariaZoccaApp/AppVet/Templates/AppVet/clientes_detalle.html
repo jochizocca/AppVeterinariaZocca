@@ -1,0 +1,15 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+   <h1>Lista de Clientes</h1>
+        <p>Nombre del Cliente:<i>{{Clientes.nombre}}</i></p>
+        <p>Apellido del Cliente:<i>{{Clientes.apellido}}</i></p>
+        <p>DNI del Cliente:<i>{{Clientes.dni}}</i></p>
+       
+   
+   <a href="{% url 'List' %}">Regresar/a>
+    </form>
+{% endblock bloquequecambia %}

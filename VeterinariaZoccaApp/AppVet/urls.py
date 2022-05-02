@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import AnimalesFormulario, ClientesFormulario, ProductosFormulario, TurnosFormulario, buscar, busquedaproductos
+from .views import AnimalesFormulario, ClientesCreate, ClientesDelete, ClientesDetail, ClientesFormulario, ClientesList, ClientesUpdate, ProductosFormulario, TurnosFormulario, buscar, busquedaproductos, editar_perfil, loginView
 from .views import turnos
 from .views import clientes
 from .views import producto
@@ -11,7 +11,10 @@ from .views import leerClientes
 from .views import leerProductos
 from .views import leerTurnos
 from .views import EliminarAnimales
-
+from .views import EditarAnimales
+from .views import loginView
+from .views import registrar, editar_perfil
+from django.contrib.auth.views import LogoutView
 
 
 
@@ -40,6 +43,15 @@ urlpatterns = [
     path('leerProductos/', leerProductos, name='leerProductos'),
     path('leerTurnos/', leerTurnos, name='leerTurnos'),
     path('EliminarAnimales/<id>', EliminarAnimales, name='EliminarAnimales'),
-
-
-        ]
+    path('EditarAnimales/<id>', EditarAnimales, name='EditarAnimales'),
+    path('clientes/list', ClientesList.as_view(), name='List'),
+    path('clientes/detail/<pk>', ClientesDetail.as_view(), name='Detail'),
+    path('clientes/edit/<pk>', ClientesUpdate.as_view(), name='Edit'),
+    path('clientes/delete/<pk>', ClientesDelete.as_view(), name='Delete'),
+    path('clientes/create/', ClientesCreate.as_view(), name='New'),   
+    path('login/', loginView, name='login'),   
+    path('registrar/', registrar, name='registrar'),  
+    path('logout/', LogoutView.as_view(template_name='AppVet/logout.html'), name='logout'), 
+    path('editarperfil/', editar_perfil, name='editar perfil')
+        ] 
+        

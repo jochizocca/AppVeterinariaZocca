@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes Formulario</title>
+    <title>Turnos Formulario</title>
 </head>
 <body>
 
@@ -13,7 +13,6 @@
     {% endif %}
   <form action="/AppVet/Turnosformulario/" method= "POST">{% csrf_token %}
      {{mi_form.as_p}}
-
     <input type="submit" value="Enviar">
     
 </body>

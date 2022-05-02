@@ -1,0 +1,18 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+   <h1>Formulario- Editar Perfil  </h1>
+    {% if mi_formulario.errors %}
+
+    {% endif %}
+
+    <form action ="" method ="POST">{% csrf_token %}
+        <table>
+           {{ mi_formulario.as_table }}
+        </table>
+
+       <button type="submit" >Editar</button> 
+{% endblock bloquequecambia %}

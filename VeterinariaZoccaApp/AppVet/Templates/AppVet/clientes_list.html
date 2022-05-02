@@ -1,0 +1,22 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+   <h1>Lista de Clientes</h1>
+   <ul>
+       {% for Clientes in  object_list %}
+          <li>
+              <p>Nombre: {{Clientes.nombre}}</p>
+              <p></p>
+                  <a href="{% url 'Detail' Clientes.id %}">Ver</a> 
+                  <a href="{% url 'Edit' Clientes.id %}">Editar</a>
+                  <a href="{% url 'Delete' Clientes.id %}">Borrar</a>
+               </p>
+          </li>
+        {% endfor %}
+   </ul>
+   <a href="{% url 'New' %}">Nuevo</a>
+   
+{% endblock bloquequecambia %}

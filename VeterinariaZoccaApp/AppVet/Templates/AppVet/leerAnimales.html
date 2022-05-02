@@ -11,8 +11,11 @@
     {% for Animales in lista_animales %}
         <li>{{Animales.nombre_animal}}- {{Animales.raza}} </li>
         <button>
-           <a href="{% url 'EliminarAnimales' animales.id %}"> Eliminar</a>
+           <a href="{% url 'EliminarAnimales' Animales.id %}"> Eliminar</a>
         </button>
+        <button>
+          <a href="{% url 'EditarAnimales' Animales.id %}"> Editar</a>
+       </button>
     {% endfor %}
 
   </ul>
