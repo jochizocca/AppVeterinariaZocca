@@ -49,6 +49,12 @@ class Productos(models.Model):
     def __str__(self) -> str:
         return f'{self.n_producto}'
 
+class Comentarios (models.Model):
+    nombre= models.CharField('nombre',max_length=20)
+    apellido=models.CharField('apellido',max_length=20)
+    comentarios=models.CharField('comentario',max_length=20)
+
+  
 
 
 class Avatar(models.Model):

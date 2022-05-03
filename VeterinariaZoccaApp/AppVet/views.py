@@ -17,6 +17,7 @@ from .models import Avatar, Clientes
 from .models import Animales
 from .models import Turnos
 from .models import Productos
+from .models import Comentarios
 
 @login_required
 def clientes(request):
@@ -90,8 +91,8 @@ def Mensajeclientes (request):
                 apellido=informacion['apellido']
                 comentarios=informacion['comentarios']
                 
-                mensajeclientes= MensajeClientes(nombre=nombre,apellido=apellido,comentarios=comentarios)
-                mensajeclientes.save()
+                comentarios=Comentarios(nombre=nombre,apellido=apellido,comentarios=comentarios)
+                comentarios.save()
                 
                 return render(request, "AppVet/Inicio.html")
     else:
