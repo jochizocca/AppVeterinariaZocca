@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import  LoginRequiredMixin
 from django.contrib.auth.decorators import login_required 
 
 from .forms import Animalesformulario, Clientesformulario, Productosformulario, Turnosformulario, UserEditForm
+from .forms import MensajeClientes
 from .models import Avatar, Clientes
 from .models import Animales
 from .models import Turnos
@@ -70,6 +71,32 @@ def ClientesFormulario (request):
     else:
             mi_formulario= Clientesformulario()
     return render(request, "AppVet/Clientesformulario.html",{'mi_form': mi_formulario})
+
+def inicio (request):
+    avatar=Avatar.objects.get(user=request.user.id)
+    return render(request,'AppVet/inicio.html', {'avatar':avatar})   
+
+@login_required
+def Mensajeclientes (request):
+    if request.method =='POST':
+            mi_formulario= MensajeClientes(request.POST)
+            
+            print(mi_formulario)
+
+            if mi_formulario.is_valid: 
+                informacion = mi_formulario.cleaned_data
+
+                nombre=informacion['nombre']
+                apellido=informacion['apellido']
+                comentarios=informacion['comentarios']
+                
+                mensajeclientes= MensajeClientes(nombre=nombre,apellido=apellido,comentarios=comentarios)
+                mensajeclientes.save()
+                
+                return render(request, "AppVet/Inicio.html")
+    else:
+            mi_formulario= MensajeClientes()
+    return render(request, "AppVet/MensajeClientes.html",{'mi_form': mi_formulario})
 
 
 def TurnosFormulario (request):

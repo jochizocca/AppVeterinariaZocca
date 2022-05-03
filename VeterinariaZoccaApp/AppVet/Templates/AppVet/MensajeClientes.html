@@ -1,0 +1,16 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+    {% if mi_form.errors %}
+      <p>style="color: red:">Ingrese sus comentarios</p>
+    {% endif %}
+  <form action="/AppVet/MensajeClientes/" method= "POST">{% csrf_token %}
+    
+     {{mi_form.as_p}}
+
+    <input type="submit" value="Enviar">
+    
+{% endblock bloquequecambia %}
