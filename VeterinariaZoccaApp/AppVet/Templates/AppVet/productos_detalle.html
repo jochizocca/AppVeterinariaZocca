@@ -1,0 +1,14 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+   <h1>Lista de Productos</h1>
+        <p>Nombre del Producto:<i>{{Productos.n_producto}}</i></p>
+        <p>Sku del Producto:<i>{{Productos.sku}}</i></p>
+        
+   
+   <a href="{% url 'List' %}">Regresar/a>
+    </form>
+{% endblock bloquequecambia %}

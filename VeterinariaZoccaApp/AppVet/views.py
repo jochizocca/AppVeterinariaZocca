@@ -94,7 +94,7 @@ def Mensajeclientes (request):
                 comentarios=Comentarios(nombre=nombre,apellido=apellido,comentarios=comentarios)
                 comentarios.save()
                 
-                return render(request, "AppVet/Comentarios.html")
+                return render(request, "AppVet/ComentariosLista.html")
     else:
             mi_formulario= MensajeClientes()
     return render(request, "AppVet/MensajeClientes.html",{'mi_form': mi_formulario})
@@ -166,47 +166,6 @@ def ProductosFormulario (request):
     return render(request, "AppVet/Productosformulario.html",{'mi_form': mi_formulario})
 
 
-#def ClientesFormularioPost (request):
-
-    #nombre=request.POST['nombre']
-    #apellido=request.POST['apellido']
-    #dni=request.POST['dni']
-
-    #mis_clientes= Clientes(nombre=nombre,apellido=apellido,dni=dni)
-    #mis_clientes.save()
-    
-    #return render(request, 'AppVet/Clientes.html', {'nombre':nombre,'apellido':apellido,'dni':dni})
-
-#def AnimalesFormularioPost (request):
-
-    
-    #nombre_animal=request.POST['nombre_animal']
-    #raza=request.POST['raza']
-    
-
-    #mis_animales= Animales(nombre_animal=nombre_animal,raza=raza)
-    #mis_animales.save()
-    #return render(request, 'AppVet/Animales.html', {'nombre_animal':nombre_animal,'raza':raza})
-
-#def ProductosFormularioPost (request):
-
-    #nombre_producto=request.POST['nombre_producto']
-    #sku=request.POST['sku']
-    
-    #mis_productos= Productos(nombre_producto=nombre_producto,sku=sku)
-    #mis_productos.save()
-    #return render(request, 'AppVet/Producto.html', {'nombre_producto':nombre_producto,'sku':sku})
-
-
-#def TurnosFormularioPost (request):
-
-    #dia=request.POST['dia']
-    #hora=request.POST['hora']
-    #email=request.POST['email']
-
-    #mis_turnos= Turnos(dia=dia,hora=hora,email=email)
-    #mis_turnos.save()
-    #return render(request, 'AppVet/Turnos.html', {'dia':dia,'hora':hora,'email':email})
 
 def busquedaproductos(request):
     return render(request,'AppVet/busquedaproductos.html')
@@ -315,6 +274,32 @@ class ClientesDelete(LoginRequiredMixin,DeleteView):
     template_name= "AppVet/clientes_delete.html"
     succes_url= 'AppVet/Clientes/list'
 
+class ProductosList(ListView):
+    model= Productos
+    template_name= "AppVet/productos_list.html"
+
+class ProductosDetail(DetailView):
+    model= Productos
+    template_name= "AppVet/productos_detalle.html"
+
+class ProductosCreate(LoginRequiredMixin,CreateView):
+    model=Productos
+    succes_url= 'AppVet/productos/list'
+    fields=['n_prducto','sku']
+
+class ProductosUpdate(LoginRequiredMixin,UpdateView):
+    model=Productos
+    succes_url= 'AppVet/Productos/list'
+    fields=['n_producto','sku']
+
+class ProductosDelete(LoginRequiredMixin,DeleteView):
+    model=Productos
+    template_name= "AppVet/productos_delete.html"
+    succes_url= 'AppVet/productos/list'
+
+
+
+
 def loginView(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data = request.POST)
@@ -353,7 +338,7 @@ def registrar(request):
  
     else:
         form=UserCreationForm()
-    return render(request, "AppVet/registrar.html", {'form': form})
+    return render(request, "AppVet/registro.html", {'form': form})
 
 @login_required
 def editar_perfil(request):

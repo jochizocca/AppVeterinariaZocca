@@ -17,8 +17,7 @@ from .views import Mensajeclientes
 from .views import registrar, editar_perfil
 from django.contrib.auth.views import LogoutView
 from .views import leerComentarios
-
-
+from .views import ProductosCreate, ProductosDelete, ProductosDetail,ProductosList,ProductosUpdate
 
 
 
@@ -32,13 +31,9 @@ urlpatterns = [
     path('Turnosformulario/',TurnosFormulario,name='TurnosFormulario'),
     path('Productosformulario/',ProductosFormulario,name='ProductoFormulario'),
     path('Animalesformulario/',AnimalesFormulario,name='AnimalesFormulario'),
-    #path('ClientesformularioPost/',ClientesFormularioPost,name='ClientesFormularioPost'),
-    #path('TurnosformularioPost/',TurnosFormularioPost,name='TurnossFormularioPost'),
-    #path('ProductoformularioPost/',ProductosFormularioPost,name='ProductoFormularioPost'),
-    #path('AnimalesformularioPost/',AnimalesFormularioPost,name='AnimalesFormularioPost'),
     path('busquedaproductos/',busquedaproductos,name='busquedacliente'),
     path('buscar/',buscar,name='buscar'),
-     path('busquedaproductos/',busquedaproductos,name='busquedacliente'),
+    path('busquedaproductos/',busquedaproductos,name='busquedacliente'),
     path('buscar/',buscar,name='buscar'),
     path('leerAnimales/', leerAnimales, name='leerAnimales'),
     path('leerClientes/', leerClientes, name='leerClientes'),
@@ -52,10 +47,16 @@ urlpatterns = [
     path('clientes/delete/<pk>', ClientesDelete.as_view(), name='Delete'),
     path('clientes/create/', ClientesCreate.as_view(), name='New'),   
     path('login/', loginView, name='login'),   
-    path('registrar/', registrar, name='registrar'),  
+    path('registro/', registrar, name='registrar'),  
     path('logout/', LogoutView.as_view(template_name='AppVet/logout.html'), name='logout'), 
     path('editarperfil/', editar_perfil, name='editar perfil'),
     path('MensajeClientes/',Mensajeclientes,name='MensajeClientes'),
     path('ComentariosLista/',leerComentarios,name='ComentariosLista'),
+    path('productos/list/', ProductosList.as_view(), name='List'),
+    path('productos/detail/<pk>', ProductosDetail.as_view(), name='Detail'),
+    path('productos/edit/<pk>', ProductosUpdate.as_view(), name='Edit'),
+    path('productos/delete/<pk>', ProductosDelete.as_view(), name='Delete'),
+    path('productos/create/', ProductosCreate.as_view(), name='New'), 
+    path('ProductosList/', ProductosList.as_view(), name='List'), 
         ] 
         

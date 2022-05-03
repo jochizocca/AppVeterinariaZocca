@@ -1,0 +1,22 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+   <h1>Lista de Productos</h1>
+   <ul>
+       {% for Productos in  object_list %}
+          <li>
+              <p>Nombre: {{Productos.n_producto}}</p>
+              <p></p>
+                  <a href="{% url 'Detail' Productos.id %}">Ver</a> 
+                  <a href="{% url 'Edit' Productos.id %}">Editar</a>
+                  <a href="{% url 'Delete' Productos.id %}">Borrar</a>
+               </p>
+          </li>
+        {% endfor %}
+   </ul>
+   <a href="{% url 'New' %}">Nuevo</a>
+   
+{% endblock bloquequecambia %}
