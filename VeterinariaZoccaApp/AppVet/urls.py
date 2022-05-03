@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import AnimalesFormulario, ClientesCreate, ClientesDelete, ClientesDetail, ClientesFormulario, ClientesList, ClientesUpdate, MensajeClientes, ProductosFormulario, TurnosFormulario, buscar, busquedaproductos, editar_perfil, loginView
+from .views import AnimalesFormulario, ClientesCreate, ClientesDelete, ClientesDetail, ClientesFormulario, ClientesList, ClientesUpdate, ProductosFormulario, TurnosFormulario, buscar, busquedaproductos, editar_perfil, loginView
 from .views import turnos
 from .views import clientes
 from .views import producto
@@ -13,8 +13,10 @@ from .views import leerTurnos
 from .views import EliminarAnimales
 from .views import EditarAnimales
 from .views import loginView
+from .views import Mensajeclientes
 from .views import registrar, editar_perfil
 from django.contrib.auth.views import LogoutView
+from .views import leerComentarios
 
 
 
@@ -53,6 +55,7 @@ urlpatterns = [
     path('registrar/', registrar, name='registrar'),  
     path('logout/', LogoutView.as_view(template_name='AppVet/logout.html'), name='logout'), 
     path('editarperfil/', editar_perfil, name='editar perfil'),
-    path('MensajeClientes/',MensajeClientes,name='MensajeClientes'),
+    path('MensajeClientes/',Mensajeclientes,name='MensajeClientes'),
+    path('ComentariosLista/',leerComentarios,name='ComentariosLista'),
         ] 
         

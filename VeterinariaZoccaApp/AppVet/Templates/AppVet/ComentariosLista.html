@@ -1,0 +1,15 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+{% for ComentariosLista in lista_mensajes %}
+        <li>{{ComentariosLista.nombre}}- {{ComentariosLista.Apellido}} </li>
+        <li>{{ComentariosLista.comentarios}}</li>
+         
+    {% endfor %}
+  
+  <a href="/AppVet/MensajeClientes/">Agregar otro Comentario</a>
+    
+{% endblock bloquequecambia %}

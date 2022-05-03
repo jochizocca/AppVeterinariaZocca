@@ -77,7 +77,7 @@ def inicio (request):
     avatar=Avatar.objects.get(user=request.user.id)
     return render(request,'AppVet/inicio.html', {'avatar':avatar})   
 
-@login_required
+
 def Mensajeclientes (request):
     if request.method =='POST':
             mi_formulario= MensajeClientes(request.POST)
@@ -94,7 +94,7 @@ def Mensajeclientes (request):
                 comentarios=Comentarios(nombre=nombre,apellido=apellido,comentarios=comentarios)
                 comentarios.save()
                 
-                return render(request, "AppVet/Inicio.html")
+                return render(request, "AppVet/Comentarios.html")
     else:
             mi_formulario= MensajeClientes()
     return render(request, "AppVet/MensajeClientes.html",{'mi_form': mi_formulario})
@@ -220,6 +220,11 @@ def buscar(request):
     else:
         return HttpResponse ("No enviaste datos")
 
+def leerComentarios(request):
+    comentarios = Comentarios.objects.all()
+    
+    contexto= {"lista_mensajes": comentarios} 
+    return  render (request , 'AppVet/ComentariosLista.html', contexto)
 
 def leerAnimales(request):
     animales = Animales.objects.all()
@@ -282,6 +287,10 @@ def EditarAnimales(request,id):
         )
 
     return render(request, 'AppVet/EditarAnimales.html', {"mi_formulario":mi_formulario})
+
+
+
+
 
 class ClientesList(ListView):
     model= Clientes
