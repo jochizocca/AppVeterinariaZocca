@@ -9,3 +9,5 @@ sería la base del proyecto en el que trabajaríamos el resto del período de en
 A partir de la segunda parte, Josefina tomó la direccion del proyecto y desarrolló buena parte pidiéndole a Fabrizio que se encargue de debuggear o codear porciones 
 clave y funcionales en el codigo que estaba siendo desarrollado. Encontramos una mejor dinámica de trabajo de ésta última manera donde Josefina lideró el equipo 
 distribuyendo tareas y derivando problemas que la retrasaban en el desarrollo principal del código. 
+
+Aclaración: Tuvimos problemas con el git y por eso los commits los hace siempre la misma persona. 
