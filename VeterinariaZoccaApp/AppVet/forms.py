@@ -2,10 +2,14 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
+
 class Clientesformulario(forms.Form):
     nombre= forms.CharField()
     apellido= forms.CharField()
     dni=forms.IntegerField()
+    link=forms.IntegerField()
+    animales=forms.IntegerField()
 
 class Animalesformulario(forms.Form):
     nombre_animal= forms.CharField()

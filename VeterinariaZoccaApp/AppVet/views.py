@@ -56,7 +56,7 @@ def inicio (request):
     
     #, {'avatar':avatar})   
 
-def ClientesFormulario (request):
+def AgregaClientes (request):
     if request.method =='POST':
             mi_formulario= Clientesformulario(request.POST)
             
@@ -68,8 +68,11 @@ def ClientesFormulario (request):
                 nombre=informacion['nombre']
                 apellido=informacion['apellido']
                 dni=informacion['dni']
+                link=['link']
+                animales=['animales']
                 
-                clientes= Clientes(nombre=nombre,apellido=apellido,dni=dni)
+                
+                clientes= Clientes(nombre=nombre,apellido=apellido,dni=dni,link=link,animales=animales)
                 clientes.save()
                 
                 return render(request, "AppVet/Inicio.html")

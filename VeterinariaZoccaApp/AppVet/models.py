@@ -23,7 +23,7 @@ class Clientes(models.Model):
     animales=models.ForeignKey(Animales,on_delete=models.CASCADE)
     
     def __str__(self) -> str:
-        return f'{self.nombre} {self.apellido}'
+        return f'{self.nombre} {self.apellido} {self.animales}'
     
        
 class Turnos(models.Model):
