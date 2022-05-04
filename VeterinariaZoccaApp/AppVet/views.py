@@ -266,7 +266,8 @@ class ClientesDetail(DetailView):
 class ClientesCreate(LoginRequiredMixin,CreateView):
     model=Clientes
     succes_url= 'AppVet/Clientes/list'
-    fields=['nombre','apellido','dni']
+    #fields=['nombre','apellido','dni']
+    form_class=Clientesformulario
 
 class ClientesUpdate(LoginRequiredMixin,UpdateView):
     model=Clientes

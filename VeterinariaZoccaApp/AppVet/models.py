@@ -23,7 +23,7 @@ class Clientes(models.Model):
     animales=models.ForeignKey(Animales,on_delete=models.CASCADE)
     
     def __str__(self) -> str:
-        return f'{self.nombre} {self.apellido} {self.animales}'
+        return f'{self.nombre} {self.apellido} {self.animales} {self.animales}'
     
        
 class Turnos(models.Model):
@@ -51,8 +51,6 @@ class Comentarios (models.Model):
     nombre= models.CharField('nombre',max_length=20)
     apellido=models.CharField('apellido',max_length=20)
     comentarios=models.CharField('comentario',max_length=20)
-
-  
 
 
 #class Avatar(models.Model):
