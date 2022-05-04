@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import AgregaClientes, Agregaturno, AnimalesFormulario, ClientesCreate, ClientesDelete, ClientesDetail, ClientesList, ClientesUpdate, ProductosFormulario, buscar, busquedaproductos, editar_perfil, loginView
+from .views import AgregaClientes, Agregaturno, AnimalesFormulario, ClientesCreate, ClientesDelete, ClientesDetail, ClientesList, ClientesUpdate, ProductosFormulario, TurnosCreate, TurnosDelete, TurnosDetail, TurnosList, TurnosUpdate, buscar, busquedaproductos, editar_perfil, loginView
 from .views import turnos
 from .views import clientes
 from .views import producto
@@ -57,5 +57,10 @@ urlpatterns = [
     path('productos/edit/<pk>', ProductosUpdate.as_view(), name='Edit'),
     path('productos/delete/<pk>', ProductosDelete.as_view(), name='Delete'),
     path('productos/create/', ProductosCreate.as_view(), name='New'), 
+    path('turnos/list/', TurnosList.as_view(), name='Listturnos'),
+    path('turnos/detail/<pk>', TurnosDetail.as_view(), name='Detailturnos'),
+    path('turnoss/edit/<pk>', TurnosUpdate.as_view(), name='Editturnos'),
+    path('turnoss/delete/<pk>', TurnosDelete.as_view(), name='Deleteturnos'),
+    path('turnoss/create/', TurnosCreate.as_view(), name='Newturnos'), 
         ] 
         

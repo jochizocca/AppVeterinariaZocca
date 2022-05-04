@@ -120,11 +120,11 @@ def Agregaturno (request):
                 dia=informacion['dia']
                 hora=informacion['hora']
                 email=informacion['email']
-                link=informacion['link']
+                #link=informacion['link']
                 cliente=informacion['cliente']
 
                 
-                turnos= Turnos(dia=dia,hora=hora,email=email,link=link,cliente=cliente)
+                turnos= Turnos(dia=dia,hora=hora,email=email,cliente=cliente)
                 turnos.save()
                 
                 return render(request, "AppVet/Inicio.html")
