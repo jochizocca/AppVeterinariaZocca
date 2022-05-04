@@ -1,0 +1,15 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+   <h1>Lista de Turnos</h1>
+        <p>
+            <form method ="post">{% csrf_token %} 
+                 Seguro que quieres eliminar este turno: "{{object}}"?
+                 <input type="submit" value="Submit"  />
+
+            </form>
+        </p>
+{% endblock bloquequecambia %}

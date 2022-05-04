@@ -1,0 +1,22 @@
+{% extends 'AppVet/padre.html' %}
+
+{% load static %}
+
+{% block bloquequecambia %}
+
+   <h1>Lista de Turnos/h1>
+   <ul>
+       {% for Turnos in  object_list %}
+          <li>
+              <p>Nombre: {{Turnos.nombre}}</p>
+              <p></p>
+                  <a href="{% url 'Detail' Turnos.id %}">Ver</a> 
+                  <a href="{% url 'Edit' Turnos.id %}">Editar</a>
+                  <a href="{% url 'Delete' Turnos.id %}">Borrar</a>
+               </p>
+          </li>
+        {% endfor %}
+   </ul>
+   <a href="{% url 'New' %}">Nuevo</a>
+   
+{% endblock bloquequecambia %}

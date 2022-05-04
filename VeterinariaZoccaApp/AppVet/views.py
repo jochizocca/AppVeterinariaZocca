@@ -18,8 +18,10 @@ from .models import Animales
 from .models import Turnos
 from .models import Productos
 from .models import Comentarios
+#from .models import Avatar
 
-#from .models import  Avatar
+
+
 
 
 def clientes(request):
@@ -54,7 +56,8 @@ def inicio (request):
     #avatar=Avatar.objects.get(user=request.user.id)
     return render(request,'AppVet/inicio.html')
     
-    #, {'avatar':avatar})   
+    #,{'avatar':avatar})
+   
 
 def AgregaClientes (request):
     if request.method =='POST':
@@ -68,12 +71,13 @@ def AgregaClientes (request):
                 nombre=informacion['nombre']
                 apellido=informacion['apellido']
                 dni=informacion['dni']
-                link=['link']
-                animales=['animales']
+                link=informacion['link']
+                animales=informacion['animales']
                 
                 
                 clientes= Clientes(nombre=nombre,apellido=apellido,dni=dni,link=link,animales=animales)
                 clientes.save()
+
                 
                 return render(request, "AppVet/Inicio.html")
     else:
@@ -104,7 +108,7 @@ def Mensajeclientes (request):
     return render(request, "AppVet/MensajeClientes.html",{'mi_form': mi_formulario})
 
 
-def TurnosFormulario (request):
+def Agregaturno (request):
     if request.method =='POST':
             mi_formulario= Turnosformulario(request.POST)
             
@@ -116,8 +120,11 @@ def TurnosFormulario (request):
                 dia=informacion['dia']
                 hora=informacion['hora']
                 email=informacion['email']
+                link=informacion['link']
+                cliente=informacion['cliente']
+
                 
-                turnos= Turnos(dia=dia,hora=hora,email=email)
+                turnos= Turnos(dia=dia,hora=hora,email=email,link=link,cliente=cliente)
                 turnos.save()
                 
                 return render(request, "AppVet/Inicio.html")
@@ -278,6 +285,31 @@ class ClientesDelete(LoginRequiredMixin,DeleteView):
     model=Clientes
     template_name= "AppVet/clientes_delete.html"
     succes_url= 'AppVet/Clientes/list'
+
+
+class TurnosList(ListView):
+    model= Turnos
+    template_name= "AppVet/turnos_list.html"
+
+class TurnosDetail(DetailView):
+    model= Turnos
+    template_name= "AppVet/turnos_detalle.html"
+
+class TurnosCreate(LoginRequiredMixin,CreateView):
+    model=Turnos
+    succes_url= 'AppVet/Turnos/list'
+    #fields=['nombre','apellido','dni']
+    form_class=Turnosformulario
+
+class TurnosUpdate(LoginRequiredMixin,UpdateView):
+    model=Turnos
+    succes_url= 'AppVet/Turnos/list'
+    fields=['__al__']
+
+class TurnosDelete(LoginRequiredMixin,DeleteView):
+    model=Turnos
+    template_name= "AppVet/turnos_delete.html"
+    succes_url= 'AppVet/turnos/list'
 
 class ProductosList(ListView):
     model= Productos

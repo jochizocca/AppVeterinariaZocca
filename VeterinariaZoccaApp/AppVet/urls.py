@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import AgregaClientes, AnimalesFormulario, ClientesCreate, ClientesDelete, ClientesDetail, ClientesList, ClientesUpdate, ProductosFormulario, TurnosFormulario, buscar, busquedaproductos, editar_perfil, loginView
+from .views import AgregaClientes, Agregaturno, AnimalesFormulario, ClientesCreate, ClientesDelete, ClientesDetail, ClientesList, ClientesUpdate, ProductosFormulario, buscar, busquedaproductos, editar_perfil, loginView
 from .views import turnos
 from .views import clientes
 from .views import producto
@@ -28,7 +28,7 @@ urlpatterns = [
     path('Producto/', producto,name='Productos'),
     path('Animales/',animales,name='Animales'),
     path('Clientesformulario/',AgregaClientes,name='ClientesFormulario'),
-    path('Turnosformulario/',TurnosFormulario,name='TurnosFormulario'),
+    path('Turnosformulario/',Agregaturno,name='TurnosFormulario'),
     path('Productosformulario/',ProductosFormulario,name='ProductoFormulario'),
     path('Animalesformulario/',AnimalesFormulario,name='AnimalesFormulario'),
     path('busquedaproductos/',busquedaproductos,name='busquedacliente'),
@@ -41,11 +41,11 @@ urlpatterns = [
     path('leerTurnos/', leerTurnos, name='leerTurnos'),
     path('EliminarAnimales/<id>', EliminarAnimales, name='EliminarAnimales'),
     path('EditarAnimales/<id>', EditarAnimales, name='EditarAnimales'),
-    path('clientes/list', ClientesList.as_view(), name='List'),
-    path('clientes/detail/<pk>', ClientesDetail.as_view(), name='Detail'),
-    path('clientes/edit/<pk>', ClientesUpdate.as_view(), name='Edit'),
-    path('clientes/delete/<pk>', ClientesDelete.as_view(), name='Delete'),
-    path('clientes/create/', ClientesCreate.as_view(), name='New'),   
+    path('clientes/list', ClientesList.as_view(), name='Listclientes'),
+    path('clientes/detail/<pk>', ClientesDetail.as_view(), name='Detailclientes'),
+    path('clientes/edit/<pk>', ClientesUpdate.as_view(), name='Editclientes'),
+    path('clientes/delete/<pk>', ClientesDelete.as_view(), name='Deleteclientes'),
+    path('clientes/create/', ClientesCreate.as_view(), name='Newclientes'),   
     path('login/', loginView, name='login'),   
     path('registro/', registrar, name='registrar'),  
     path('logout/', LogoutView.as_view(template_name='AppVet/logout.html'), name='logout'), 

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Clientes
+from .models import Clientes, Turnos
 
 
 
@@ -21,10 +21,14 @@ class Animalesformulario(forms.Form):
     raza= forms.CharField()
     
 
-class Turnosformulario(forms.Form):
-    dia= forms.DateField(widget = forms.SelectDateWidget)
-    hora= forms.CharField()
-    email=forms.EmailField()
+class Turnosformulario(forms.ModelForm):
+    class Meta:
+        model= Turnos
+        fields=('__all__')
+
+    #dia= forms.DateField(widget = forms.SelectDateWidget)
+    #hora= forms.CharField()
+    #email=forms.EmailField()
 
 class Productosformulario(forms.Form):
     n_producto= forms.CharField()
@@ -48,6 +52,10 @@ class Meta:
     model= User 
     fields=['email','first_name','last_name','password1','password2']
     help_text={k:"" for k in fields}
+
+
+
+
 
 
 

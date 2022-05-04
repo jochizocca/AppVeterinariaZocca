@@ -1,13 +1,17 @@
+from tkinter import Widget
 from django.db import models
 from django.contrib.auth.models import User
-from django.forms import DateField
+from django.forms import DateField,SelectDateWidget
+
 
 
 # Create your models here.
 
+
 class Animales(models.Model):
     nombre_animal= models.CharField('nombre_animal',max_length=20)
-    raza=models.CharField('raza',max_length=20)    
+    raza=models.CharField('raza',max_length=20)
+        
 
     def __str__(self) -> str:
         return f'{self.nombre_animal} {self.raza}'
@@ -30,14 +34,11 @@ class Turnos(models.Model):
     dia=models.DateField()
     hora=models.CharField(max_length=20)
     email=models.EmailField()
-    #link=models.CharField(max_length=20)
-    #cliente=models.ForeignKey(Clientes,on_delete=models.CASCADE)
-   
-
-    
+    link=models.CharField(max_length=20)
+    cliente=models.ForeignKey(Clientes,on_delete=models.CASCADE)
    
     def __str__(self) -> str:
-        return f'{self.dia} {self.hora}'
+        return f'{self.dia} {self.hora} {self.cliente}'
 
 
 class Productos(models.Model):
@@ -56,4 +57,5 @@ class Comentarios (models.Model):
 #class Avatar(models.Model):
     
     #user=models.ForeignKey(User, on_delete=models.CASCADE)
+    
     #imagen=models.ImageField(upload_to='avatares',null=True)
