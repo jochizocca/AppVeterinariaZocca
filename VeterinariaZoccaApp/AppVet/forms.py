@@ -13,7 +13,7 @@ class Animalesformulario(forms.Form):
     
 
 class Turnosformulario(forms.Form):
-    dia= forms.CharField()
+    dia= forms.DateField(widget = forms.SelectDateWidget)
     hora= forms.CharField()
     email=forms.EmailField()
 

@@ -13,13 +13,15 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import Animalesformulario, Clientesformulario, Productosformulario, Turnosformulario, UserEditForm
 from .forms import MensajeClientes
-from .models import Avatar, Clientes
+from .models import  Clientes
 from .models import Animales
 from .models import Turnos
 from .models import Productos
 from .models import Comentarios
 
-@login_required
+#from .models import  Avatar
+
+
 def clientes(request):
 
 
@@ -27,7 +29,7 @@ def clientes(request):
     return render(request,'AppVet/Clientes.html')
 
 
-@login_required
+
 def turnos(request):
 
         
@@ -39,7 +41,7 @@ def producto(request):
    
     
     return render(request,'AppVet/Productos.html')
-@login_required
+
 def animales(request):
 
     
@@ -49,8 +51,10 @@ def bienvenida (request):
     return HttpResponse('Bienvenidos a la Veterinaria del Dr Zocca')
 
 def inicio (request):
-    avatar=Avatar.objects.get(user=request.user.id)
-    return render(request,'AppVet/inicio.html', {'avatar':avatar})   
+    #avatar=Avatar.objects.get(user=request.user.id)
+    return render(request,'AppVet/inicio.html')
+    
+    #, {'avatar':avatar})   
 
 def ClientesFormulario (request):
     if request.method =='POST':
@@ -73,9 +77,6 @@ def ClientesFormulario (request):
             mi_formulario= Clientesformulario()
     return render(request, "AppVet/Clientesformulario.html",{'mi_form': mi_formulario})
 
-def inicio (request):
-    avatar=Avatar.objects.get(user=request.user.id)
-    return render(request,'AppVet/inicio.html', {'avatar':avatar})   
 
 
 def Mensajeclientes (request):
@@ -340,7 +341,7 @@ def registrar(request):
         form=UserCreationForm()
     return render(request, "AppVet/registro.html", {'form': form})
 
-@login_required
+
 def editar_perfil(request):
     usuario=request.user
     if request.method=='POST':
